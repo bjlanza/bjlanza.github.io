@@ -1,331 +1,201 @@
-jQuery(document).ready(function ($) {
-  "use strict";
+(function($) {
 
-  //REV SLIDER
-  jQuery(".tp-banner").show().revolution({
-    dottedOverlay: "none",
-    delay: 9000,
-    startwidth: 1170,
-    startheight: 700,
-    hideThumbs: 200,
+	'use strict';
 
-    thumbWidth: 100,
-    thumbHeight: 50,
-    thumbAmount: 5,
+	// bootstrap dropdown hover
 
-    navigationType: "none",
-    navigationArrows: "solo",
-    navigationStyle: "preview1",
+  // loader
+  var loader = function() {
+    setTimeout(function() { 
+      if($('#loader').length > 0) {
+        $('#loader').removeClass('show');
+      }
+    }, 1);
+  };
+  loader();
 
-    touchenabled: "on",
-    onHoverStop: "on",
+	
+	$('nav .dropdown').hover(function(){
+		var $this = $(this);
+		$this.addClass('show');
+		$this.find('> a').attr('aria-expanded', true);
+		$this.find('.dropdown-menu').addClass('show');
+	}, function(){
+		var $this = $(this);
+			$this.removeClass('show');
+			$this.find('> a').attr('aria-expanded', false);
+			$this.find('.dropdown-menu').removeClass('show');
+	});
 
-    swipe_velocity: 0.7,
-    swipe_min_touches: 1,
-    swipe_max_touches: 1,
-    drag_block_vertical: false,
 
-    keyboardNavigation: "on",
+	$('#dropdown04').on('show.bs.dropdown', function () {
+	  console.log('show');
+	});
 
-    navigationHAlign: "center",
-    navigationVAlign: "bottom",
-    navigationHOffset: 0,
-    navigationVOffset: 20,
+	// home slider
+	$('.home-slider').owlCarousel({
+    loop:true,
+    autoplay: true,
+    margin:0,
+    animateOut: 'fadeOut',
+    animateIn: 'fadeIn',
+    nav:true,
+    autoplayHoverPause: true,
+    items: 1,
+    navText : ["<span class='ion-chevron-left'></span>","<span class='ion-chevron-right'></span>"],
+    responsive:{
+      0:{
+        items:1,
+        nav:false
+      },
+      600:{
+        items:1,
+        nav:false
+      },
+      1000:{
+        items:1,
+        nav:true
+      }
+    }
+	});
 
-    soloArrowLeftHalign: "left",
-    soloArrowLeftValign: "center",
-    soloArrowLeftHOffset: 20,
-    soloArrowLeftVOffset: 0,
-
-    soloArrowRightHalign: "right",
-    soloArrowRightValign: "center",
-    soloArrowRightHOffset: 20,
-    soloArrowRightVOffset: 0,
-
-    shadow: 0,
-    fullWidth: "off",
-    fullScreen: "on",
-
-    spinner: "spinner0",
-
-    stopLoop: "off",
-    stopAfterLoops: -1,
-    stopAtSlide: -1,
-
-    shuffle: "off",
-
-    forceFullWidth: "off",
-    fullScreenAlignForce: "off",
-    minFullScreenHeight: "400",
-
-    hideThumbsOnMobile: "off",
-    hideNavDelayOnMobile: 1500,
-    hideBulletsOnMobile: "off",
-    hideArrowsOnMobile: "off",
-    hideThumbsUnderResolution: 0,
-
-    hideSliderAtLimit: 0,
-    hideCaptionAtLimit: 0,
-    hideAllCaptionAtLilmit: 0,
-    startWithSlide: 0,
-    fullScreenOffsetContainer: ".header",
-  });
-
-  //SMOOTH SCROLL EFFECT
-  $('[data-toggle="elementscroll"]').on("click", function () {
-    "use strict";
-
-    if (
-      location.pathname.replace(/^\//, "") ==
-        this.pathname.replace(/^\//, "") &&
-      location.hostname == this.hostname
-    ) {
-      var target = $(this.hash);
-      target = target.length ? target : $("[name=" + this.hash.slice(1) + "]");
-      if (target.length) {
-        $("html,body").animate({ scrollTop: target.offset().top }, 1000);
-        return false;
+  $('.home-slider-loop-false').owlCarousel({
+    loop:false,
+    autoplay: true,
+    margin:0,
+    animateOut: 'fadeOut',
+    animateIn: 'fadeIn',
+    nav:true,
+    autoplayHoverPause: true,
+    items: 1,
+    navText : ["<span class='ion-chevron-left'></span>","<span class='ion-chevron-right'></span>"],
+    responsive:{
+      0:{
+        items:1,
+        nav:false
+      },
+      600:{
+        items:1,
+        nav:false
+      },
+      1000:{
+        items:1,
+        nav:true
       }
     }
   });
 
-  //COUNTDOWN TIMER
-  var newYear = new Date();
-  newYear = new Date(newYear.getFullYear() + 1, 1 - 1, 1);
-  $("#countdown").countdown({ until: new Date(2022, 3 - 1, 31) }); // enter event day
+	// owl carousel
+	var majorCarousel = $('.js-carousel-1');
+	majorCarousel.owlCarousel({
+    loop:true,
+    autoplay: true,
+    stagePadding: 7,
+    margin: 20,
+    animateOut: 'fadeOut',
+    animateIn: 'fadeIn',
+    nav: true,
+    autoplayHoverPause: true,
+    items: 3,
+    navText : ["<span class='ion-chevron-left'></span>","<span class='ion-chevron-right'></span>"],
+    responsive:{
+      0:{
+        items:1,
+        nav:false
+      },
+      600:{
+        items:2,
+        nav:false
+      },
+      1000:{
+        items:3,
+        nav:true,
+        loop:false
+      }
+  	}
+	});
 
-  $("#removeCountdown").toggle(
-    function () {
-      $(this).text("Re-attach");
-      $("#defaultCountdown").countdown("destroy");
-    },
-    function () {
-      $(this).text("Remove");
-      $("#defaultCountdown").countdown({ until: newYear });
+	// owl carousel
+	var major2Carousel = $('.js-carousel-2');
+	major2Carousel.owlCarousel({
+    loop:true,
+    autoplay: true,
+    stagePadding: 7,
+    margin: 20,
+    animateOut: 'fadeOut',
+    animateIn: 'fadeIn',
+    nav: true,
+    autoplayHoverPause: true,
+    items: 4,
+    navText : ["<span class='ion-chevron-left'></span>","<span class='ion-chevron-right'></span>"],
+    responsive:{
+      0:{
+        items:1,
+        nav:false
+      },
+      600:{
+        items:3,
+        nav:false
+      },
+      1000:{
+        items:4,
+        nav:true,
+        loop:false
+      }
+  	}
+	});
+
+
+  $('.centernonloop').owlCarousel({
+    center: true,
+    items: 1,
+    loop: false,
+    margin:10,
+    dots: true,
+    responsive:{
+      600:{
+        items: 3
+      }
     }
-  );
-
-  //MAGNIFIC POPUP LOAD CONTENT VIA AJAX
-  $(".html-popup").magnificPopup({ type: "ajax" });
-
-  //MAGNIFIC POPUP IMAGE
-  $(".image-popup").magnificPopup({
-    type: "image",
-    gallery: {
-      enabled: true,
-      navigateByImgClick: true,
-      preload: [0, 1], // Will preload 0 - before current, and 1 after the current image
-    },
   });
 
-  //LOAD MORE
-  $("#list-speaker li:lt(8)").show();
 
-  $("#loadmore").on("click", function () {
-    $("#list-speaker li:lt(24)").fadeIn();
-    $("#list-speaker li:lt(24)").show();
-  });
+	var contentWayPoint = function() {
+		var i = 0;
+		$('.element-animate').waypoint( function( direction ) {
 
-  //FAQ TOGGLE
-  $(".faqs dd").hide();
-  $(".faqs dt").on({
-    click: function () {
-      $(this).next().slideToggle("normal");
-    },
-    mouseenter: function () {
-      $(this).addClass("hover");
-    },
-    mouseleave: function () {
-      $(this).removeClass("hover");
-    },
-  });
+			if( direction === 'down' && !$(this.element).hasClass('element-animated') ) {
+				
+				i++;
 
-  //OWLCAROUSEL HOTEL CAROUSEL
-  var owl = $("#hotel-carousel");
+				$(this.element).addClass('item-animate');
+				setTimeout(function(){
 
-  owl.owlCarousel({
-    autoPlay: false,
-    itemsCustom: [
-      [0, 1],
-      [450, 1],
-      [600, 3],
-      [700, 3],
-      [1000, 3],
-      [1200, 3],
-      [1600, 3],
-    ],
-    pagination: false,
-    navigation: true,
-    navigationText: [
-      '<i class="pe-4x pe-7s-angle-left pe-border"></i>',
-      '<i class="pe-4x  pe-7s-angle-right pe-border"></i>',
-    ],
-  });
+					$('body .element-animate.item-animate').each(function(k){
+						var el = $(this);
+						setTimeout( function () {
+							var effect = el.data('animate-effect');
+							if ( effect === 'fadeIn') {
+								el.addClass('fadeIn element-animated');
+							} else if ( effect === 'fadeInLeft') {
+								el.addClass('fadeInLeft element-animated');
+							} else if ( effect === 'fadeInRight') {
+								el.addClass('fadeInRight element-animated');
+							} else {
+								el.addClass('fadeInUp element-animated');
+							}
+							el.removeClass('item-animate');
+						},  k * 100);
+					});
+					
+				}, 100);
+				
+			}
 
-  //OWLCAROUSEL FUNFACT CAROUSEL
-  var owl = $("#funfacts-carousel");
+		} , { offset: '95%' } );
+	};
+	contentWayPoint();
 
-  owl.owlCarousel({
-    itemsCustom: [
-      [0, 1],
-      [450, 1],
-      [600, 2],
-      [700, 4],
-      [1000, 4],
-      [1200, 4],
-      [1600, 4],
-    ],
-    navigation: false,
-    navigationText: [
-      '<i class="pe-4x pe-7s-angle-left pe-border"></i>',
-      '<i class="pe-4x  pe-7s-angle-right pe-border"></i>',
-    ],
-  });
 
-  //OWLCAROUSEL PRICE TABLE CAROUSEL
-  var owl = $("#price-carousel");
 
-  owl.owlCarousel({
-    itemsCustom: [
-      [0, 1],
-      [450, 1],
-      [600, 2],
-      [700, 3],
-      [1000, 3],
-      [1200, 3],
-    ],
-    pagination: false,
-    navigation: true,
-    navigationText: [
-      '<i class="pe-4x pe-7s-angle-left pe-border"></i>',
-      '<i class="pe-4x  pe-7s-angle-right pe-border"></i>',
-    ],
-  });
-
-  //OWLCAROUSEL TESTIMONIAL CAROUSEL
-  var owl = $("#testimonial-carousel");
-
-  owl.owlCarousel({
-    navigation: false, // Show next and prev buttons
-    slideSpeed: 300,
-    paginationSpeed: 400,
-    singleItem: true,
-    transitionStyle: "fade",
-  });
-
-  //OWLCAROUSEL SPONSORS CAROUSEL
-  var owl = $("#sponsors-carousel");
-
-  owl.owlCarousel({
-    autoPlay: false,
-    itemsCustom: [
-      [0, 1],
-      [450, 1],
-      [600, 3],
-      [700, 3],
-      [1000, 3],
-      [1200, 5],
-      [1600, 5],
-    ],
-    pagination: false,
-    navigation: true,
-    navigationText: [
-      '<i class="pe-4x pe-7s-angle-left pe-border"></i>',
-      '<i class="pe-4x  pe-7s-angle-right pe-border"></i>',
-    ],
-  });
-
-  // FUNFACTS
-  $(".number").counterUp({
-    delay: 10,
-    time: 3000,
-  });
-
-  //FIX HOVER EFFECT ON IOS DEVICES
-  document.addEventListener("touchstart", function () {}, true);
-});
-
-$(window).load(function () {
-  $("#nav-primary").sticky({ topSpacing: 0 });
-
-  //PRELOADER
-  $("#preload").delay(350).fadeOut("slow"); // will fade out the white DIV that covers the website.
-
-  //CUSTOM TOOLBAR
-  $("#content").mCustomScrollbar({
-    theme: "dark-3",
-    live: "on",
-  });
-});
-
-// REGISTER FORM FUNCTION
-var contact_send = function () {
-  "use strict";
-
-  var name = $("#name").val();
-  var email = $("#email").val();
-  var phone = $("#phone").val();
-  var type = $("#type").val();
-
-  if (name == "") {
-    alert("name area is empty!");
-    $("#name").focus();
-  } else if (email == "") {
-    alert("email address area is empty!");
-    $("#email").focus();
-  } else if (phone == "") {
-    alert("phone number area is empty!");
-    $("#phone").focus();
-  } else if (type == "") {
-    alert("register type isn't selected!");
-    $("#type").focus();
-  } else {
-    $.post(
-      "contact.send.php",
-      { name: name, email: email, phone: phone, type: type },
-      function (result) {
-        if (result == "SUCCESS") {
-          alert("Your contact form is sent.");
-          setTimeout(function () {
-            $("#name").val("");
-            $("#email").val("");
-            $("#phone").val("");
-            $("#type").val("");
-          }, 3000);
-        } else {
-          alert(
-            "Your contact form isn't sent. Please check fields and try again."
-          );
-        }
-      }
-    );
-  }
-};
-
-/* NEWSLETTER FORM FUNCTION */
-var newsletter_send = function () {
-  "use strict";
-
-  var email = $("#newsletter_email").val();
-  if (email == "") {
-    alert("Your email address is empty!");
-    $("#newsletter_email").focus();
-  } else {
-    $.post("newsletter.send.php", { email: email }, function (result) {
-      console.log(result);
-
-      if (result == "SUCCESS") {
-        alert("Thank you. Your email is added to our database.");
-        setTimeout(function () {
-          $("#newsletter_email").val("");
-        }, 3000);
-      } else if (result == "EXIST") {
-        alert("Error. Your email address is already exist our database.");
-        $("#newsletter_email").focus();
-      } else {
-        alert("Error. Your email isn't added to our database.");
-        $("#newsletter_email").focus();
-      }
-    });
-  }
-};
+})(jQuery);
