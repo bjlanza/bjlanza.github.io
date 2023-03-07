@@ -1,5 +1,6 @@
 #Update all the sections by editing the data.yml file inside _data folder.
-
+include: [_cv]
+source: _cv
 # Site Settings
 title: Mi CV
 url: "http://www.puntadelanza.eu"
